@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+{% load staticfiles%}
+{% load humanize %}
+<html lang="en" dir="ltr">
+  <head>
+    <link rel="shortcut icon" type="image/png" href="{% static 'nig.jpg' %}"/>
+    <meta charset="utf-8">
+    <meta http-equiv="refresh" content="60">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <title>Nigeria Decides</title>
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-light text-white bg-success" > <!-- #e3f2fd -->
+  <span class="navbar-text">
+    <b>Welcome, </b> Experience Nigeria Decides First hand!
+  </span><br>
+
+  <span class='text-dark'><b>Local Time: </b>{{now}}</span>
+
+
+</nav>
+
+    <div class="container mb-5">
+
+      <div class="jumbotron text-secondary mt-5">
+        <p>Following the conclusion of the Presidential and National Assembly
+          elections, The good people of Nigeria enthusiatically await the result.
+          My table presents the counts of the presidential election for the two
+          major political parties where a winner is most likely to emerge. The
+          table conforms with the INEC's realeases only. Updates come in as soon
+          as INEC announces.
+        </p><br>
+        <small>- Sani Abdullahi [Student Federal University of Technology, Minna.]</small>
+      </div>
+
+      <table class="table table-hover table-striped">
+  <thead>
+    <tr>
+      <th scope="col">S/N</th>
+      <th scope="col">STATE</th>
+      <th scope="col">APC</th>
+      <th scope="col">PDP</th>
+      <th style="text-align: right;" scope="col">BIAS[PDP]</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    {%for key, value in parties.items%}
+    <tr>
+      <th scope="row">{{forloop.counter}}</th>
+      <td>{{key}}</td>
+      <td>{{value.APC|intcomma}}</td>
+      <td>{{value.PDP|intcomma}}</td>
+      <td align='right'>{{value.bias|intcomma}}</td>
+    </tr>
+    {%endfor%}
+
+    <tr class='bg-success'>
+      <th>TOTAL</th>
+      <td></td>
+      <td>{{sapc|intcomma}}</td>
+      <td>{{spdp|intcomma}}</td>
+      <td align='right'>{{tbias|intcomma}}</td>
+    </tr>
+
+  </tbody>
+</table>
+
+    </div>
+  </body>
+</html>
